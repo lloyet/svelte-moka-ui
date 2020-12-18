@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { scale } from 'svelte/transition';
+	import { elasticOut } from 'svelte/easing';
 	import Icon from 'mdi-svelte';
 	import { mdiFire } from '@mdi/js';
 	import Alert from '../components/Alert/Alert.svelte';
@@ -9,7 +11,7 @@
 
 <main>
 	<h1>Hello {name}!</h1>
-	<Alert bind:visible color="#2ff5a5" rounded dismissible>
+	<Alert bind:visible inTrans="{scale}" inOpts="{{ duration: 1200, easing: elasticOut }}" color="#2ff5a5" rounded dismissible>
 		<div slot="icon" style="display: flex; align-items: center; justify-content: center;">
 			<Icon path="{mdiFire}"/>
 		</div>

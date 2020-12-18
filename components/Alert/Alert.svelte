@@ -15,8 +15,10 @@
 	export let dismissible: boolean = false;
 	export let visible: boolean = false;
 	export let style: string = '';
-	export let transition: any = fly;
-	export let transitionOpts: any = { x: 100, duration: 800, easing: quintOut };
+	export let inTrans: any = fly;
+	export let outTrans: any = fly;
+	export let inOpts: any = { x: 100, duration: 800, easing: quintOut };
+	export let outOpts: any = { x: 100, duration: 800, easing: quintOut };
 	
 	const handleShow = (): void => {
 		visible = false;
@@ -37,7 +39,9 @@
 	class:border
 	class:outlined
 	style="--padding: {dense ? '5px' : '25px'}; --radius: {rounded ? '5px' : '0'}; --shadow: {outlined ? '0 0 0px 1px #696969' : 'none'}; --color: {color}; border-{border}: 5px solid {color}; {style}"
-	transition:transition="{transitionOpts}">
+	in:inTrans="{inOpts}"
+	out:outTrans="{outOpts}"
+	>
 		<div class="icon">
 			<slot name="icon" />
 		</div>
