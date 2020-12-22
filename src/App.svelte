@@ -1,24 +1,12 @@
 <script lang="ts">
-	import { scale } from 'svelte/transition';
-	import { elasticOut } from 'svelte/easing';
-	import Icon from 'mdi-svelte';
 	import { mdiFire } from '@mdi/js';
-	import Alert from '../components/Alert/Alert.svelte';
+	import MokaApp from '../components/mokai/components/MokaApp';
+	import Alert from '../components/mokai/components/Alert';
+	import Button from '../components/mokai/components/Button';
+	import Icon from '../components/mokai/components/Icon';
 
-	export let name: string;
-	let visible: boolean;
+	let active: boolean = true;
 </script>
-
-<main>
-	<h1>Hello {name}!</h1>
-	<Alert bind:visible inTrans="{scale}" inOpts="{{ duration: 1200, easing: elasticOut }}" color="#2ff5a5" rounded dismissible>
-		<div slot="icon" style="display: flex; align-items: center; justify-content: center;">
-			<Icon path="{mdiFire}"/>
-		</div>
-		<div style="height: 100%; display: flex; justify-content: center; align-items: center;" slot="content">Visit the <a href="https://svelte.dev/tutorial">Svelte tutooooooooorial</a> to learn how to build</div>
-	</Alert>
-	<button on:click="{() => { visible = true }}">reset</button>
-</main>
 
 <style>
 	main {
@@ -26,14 +14,7 @@
 		padding: 1em;
 		max-width: 240px;
 		margin: 0 auto;
-		background: lightgrey;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+		background: white;
 	}
 
 	@media (min-width: 640px) {
@@ -41,4 +22,29 @@
 			max-width: none;
 		}
 	}
+
+	.alert__content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 </style>
+
+<main>
+	<MokaApp theme="dark">
+		<Alert class="success-text" border="left" outlined dismissible bind:active on:dismiss="{() => {setTimeout(() => { active = !active }, 1000);}}">
+			<div class="alert__content error-text" slot="icon">
+				<Icon path="{mdiFire}" size="32"/>
+			</div>
+			<div class="grey-text text-darken-3">
+				Hello world !
+			</div>
+		</Alert>
+		<Button on:click="{() => { active = !active }}">
+			<div slot="icon">
+				<Icon path="{mdiFire}"/>
+			</div>
+			reset
+		</Button>
+	</MokaApp>
+</main>

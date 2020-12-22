@@ -1,0 +1,71 @@
+@import './variables';
+
+.m-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	width: max-content;
+	min-height: 12px;
+	border-radius: $button-border-radius;
+	border: none;
+	padding: 12px;
+	background: $primary-color;
+	transition: all 330ms ease-in-out;
+
+	.m-button__icon {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+		opacity: 0;
+		max-width: 0;
+		transition: all 330ms ease-in-out, transform 330ms;
+		transform: rotate(-180deg) scale(0);
+	}
+
+	.m-button__content {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		color: invert($color: $primary-color, $weight: 100%);
+	}
+
+	&.outlined {
+		border: 1px solid $primary-color;
+		background: none;
+	}
+
+	&.rounded {
+		border-radius: 2em;
+	}
+
+	&.bordered {
+		box-shadow: #b2b2b2 1px 1px 5px 0px;
+	}
+
+	&:active {
+		background: $primary-color;
+	}
+
+	&:hover {
+		background: lighten($color: $primary-color, $amount: 40%);
+		
+	}
+
+	&:hover .m-button__icon {
+		max-width: 120px;
+		transform: rotate(0deg) scale(1);
+		opacity: 1.0;
+	}
+
+	&:hover .m-button__content {
+		color: invert($color: $secondary-color, $weight: 100%);
+	}
+
+	&:disabled {
+		background: #b2b2b2;
+		pointer-events: none;
+	}
+}

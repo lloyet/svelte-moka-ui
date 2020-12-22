@@ -1,0 +1,18 @@
+@import './tools//colors';
+@import './tools/elevation';
+
+$primary-color: #f9c74f !default;
+$secondary-color: #577590 !default;
+$success-color: #90be6d !default;
+$info-color: #43aa8b !default;
+$warning-color: #f8961e !default;
+$error-color: #f94144 !default;
+
+$font-size-root: 16px !default;
+$border-radius-root: 6px !default;
+
+$spacer: 6px !default;
+
+$body-font-family: 'Roboto', 'Segoe UI', sans-serif !default;
+
+@import 'moka-theme';
