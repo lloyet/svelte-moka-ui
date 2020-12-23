@@ -47,7 +47,7 @@
 			<slot/>
 		</div>
 		{#if dismissible}
-			<div class="closer grey-text text-darken-4">
+			<div class="closer grey-text text-darken-2">
 				<button on:click="{clickHandler}">
 					<Icon path="{mdiClose}"/>
 				</button>

@@ -9,8 +9,7 @@
 	min-height: 12px;
 	border-radius: $button-border-radius;
 	border: none;
-	padding: 12px;
-	background: $primary-color;
+	padding: $button-padding;
 	transition: all 330ms ease-in-out;
 
 	.m-button__icon {

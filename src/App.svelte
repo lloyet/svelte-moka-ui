@@ -32,7 +32,7 @@
 
 <main>
 	<MokaApp theme="dark">
-		<Alert class="success-text" border="left" outlined dismissible bind:active on:dismiss="{() => {setTimeout(() => { active = !active }, 1000);}}">
+		<Alert class="white-text text-accent-5 primary-color" border="bottom" dismissible bind:active on:dismiss="{() => {setTimeout(() => { active = !active }, 1000);}}">
 			<div class="alert__content error-text" slot="icon">
 				<Icon path="{mdiFire}" size="32"/>
 			</div>
