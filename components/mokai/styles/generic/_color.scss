@@ -7,7 +7,6 @@
       @if $color_variant == 'base' {
         .#{$color} {
           background-color: $value !important;
-          border-color: $value !important;
         }
         .#{$color}-text {
           color: $value !important;
@@ -16,7 +15,6 @@
       }
       .#{$color}.#{$color_variant} {
         background-color: $value !important;
-        border-color: $value !important;
       }
       .#{$color}-text.text-#{$color_variant} {
         color: $value !important;
@@ -27,7 +25,6 @@
     @each $shade, $value in $color_values {
       .#{$shade} {
         background-color: $value !important;
-        border-color: $value !important;
       }
       .#{$shade}-text {
         color: $value !important;
@@ -50,7 +47,6 @@
 {
   .#{$color}-color {
     background-color: $value !important;
-    border-color: $value !important;
   }
   .#{$color}-text {
     color: $value !important;

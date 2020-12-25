@@ -1,66 +1,57 @@
 @import './variables';
 
 .m-alert {
-	padding: $alert-padding;
-	display: flex;
-	justify-content: space-evenly;
-	align-items: center;
-	width: max-content;
-	overflow: hidden;
-	border-radius: $alert-border-radius;
+    padding: $alert-padding;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: max-content;
+    overflow: hidden;
+    border-radius: $alert-border-radius;
 
-	.icon {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		padding: 0 $alert-padding 0 0 ;
-	}
+    .closer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: $alert-dense-padding;
 
-	.content {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
+        button {
+            border: none;
+            cursor: pointer;
+            background: none;
+        }
+    }
 
-	.closer {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		padding: 0 0 0 $alert-padding;
+    &.dense {
+        border-width: $alert-dense-border-width;
+        padding: $alert-dense-padding;
+    }
 
-		button {
-			border: none;
-			cursor: pointer;
-			background: none;
-		}
-	}
+    &.rounded {
+        border-radius: 2em;
+    }
 
-	&.dense {
-		border-width: $alert-dense-border-width;
-		padding: $alert-dense-padding;
-	}
+    &.tile {
+        border-radius: 0;
+    }
 
-	&.tile {
-		border-radius: 0;
-	}
+    &.outlined {
+        border: $alert-outline;
+    }
 
-	&.outlined {
-		border: $alert-outline;
-	}
+    &.border-left {
+        border-left: $alert-border;
+    }
 
-	&.border-left {
-		border-left: $alert-border;
-	}
+    &.border-right {
+        border-right: $alert-border;
+    }
 
-	&.border-right {
-		border-right: $alert-border;
-	}
+    &.border-top {
+        border-top: $alert-border;
+    }
 
-	&.border-top {
-		border-top: $alert-border;
-	}
-
-	&.border-bottom {
-		border-bottom: $alert-border;
-	}
+    &.border-bottom {
+        border-bottom: $alert-border;
+    }
 }
