@@ -1,7 +1,7 @@
 <script lang="ts">
     import { createEventDispatcher, onMount } from 'svelte';
     import { fly } from 'svelte/transition';
-    import { bounceOut, quintOut } from 'svelte/easing';
+    import { quintOut } from 'svelte/easing';
     import Icon from '../Icon/Icon.svelte';
     import { mdiClose } from '@mdi/js';
     
@@ -19,8 +19,8 @@
     export let style: string = '';
     export let inTrans: any = fly;
     export let outTrans: any = fly;
-    export let inOpts: any = { x: 100, duration: 1200, easing: quintOut };
-    export let outOpts: any = { x: 100, duration: 800, easing: quintOut };
+    export let inOpts: any = { x: 150, duration: 800, easing: quintOut };
+    export let outOpts: any = { x: 150, duration: 800, easing: quintOut };
     
 
     const clickHandler = (): void => {
@@ -42,13 +42,20 @@
         {style}
         in:inTrans="{inOpts}"
         out:outTrans="{outOpts}">
-        <slot />
-        {#if dismissible}
-            <div class="closer">
-                <button on:click="{clickHandler}">
-                    <Icon path="{mdiClose}"/>
-                </button>
+        <div class="m-alert__wrapper">
+            <div class="m-alert__content">
+                <slot />
             </div>
-        {/if}
+            {#if dismissible}
+                <div class="m-alert__closer">
+                    <button on:click="{clickHandler}">
+                        <Icon path="{mdiClose}"/>
+                    </button>
+                </div>
+            {/if}
+            {#if border}
+                <div class="m-alert__border border-{border}"></div>
+            {/if}
+        </div>
     </div>
 {/if}

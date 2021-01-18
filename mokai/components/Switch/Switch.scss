@@ -1,0 +1,75 @@
+@import './variables';
+
+.m-switch {
+    position: relative;
+    width: 64px;
+    height: 32px;
+    cursor: pointer;
+    border: $switch-border-radius;
+    border-width: $switch-border-width;
+    transition: all ease-in-out 330ms;
+
+    input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+
+        &:checked + .slider .content {
+            transform: translate(15px, 0);
+        }
+    }
+
+    .slider {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        flex-wrap: nowrap;
+        overflow: hidden;
+        align-items: center;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: inherit;
+        transition: inherit;
+
+        .content {
+            position: absolute;
+            transition: inherit;
+            transform: translate(-15px, 0);
+        }
+
+        .dot {
+            width: 26px;
+            height: 26px;
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+            align-items: center;
+            border-radius: 1em;
+            background: white;
+        }
+
+        .on {
+            left: -8px;
+        }
+        
+        .off {
+            right: -8px;
+        }
+    }
+
+    &.disabled {
+        color: lightgrey;
+        background: #eee;
+        pointer-events: none;
+    }
+
+    &.rounded {
+        border-radius: $switch-border-radius-rounded;
+    }
+
+    &.outlined {
+        border: $switch-outline;
+    }
+}
