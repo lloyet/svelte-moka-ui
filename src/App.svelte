@@ -1,7 +1,7 @@
 <script lang="ts">
     import { scale } from 'svelte/transition';
     import { expoOut } from 'svelte/easing';
-    import { mdiFire, mdiClose, mdiCheck } from '@mdi/js';
+    import { mdiFire, mdiCheck, mdiClose, mdiLoading, mdiMicrophone, mdiMicrophoneOff } from '@mdi/js';
     import MokaApp from '../mokai/components/MokaApp';
     import Alert from '../mokai/components/Alert';
     import Button from '../mokai/components/Button';
@@ -9,7 +9,7 @@
     import Switch from '../mokai/components/Switch';
 
     let active: boolean = true;
-    let checked:boolean;
+    let progress: string = '80';
 </script>
 
 <style>
@@ -26,21 +26,16 @@
             max-width: none;
         }
     }
-
-    .alert__content {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
 </style>
 
 <MokaApp theme="dark">
     <main>
-        <Alert class="error-color white-text" border="left" dismissible bind:active on:dismiss="{() => {setTimeout(() => { active = !active }, 1500);}}">
-            <div class="alert__content">
-                <Icon class="animation-spin" path="{mdiFire}" size="28"/>
-                Hello world !
+        <input type="range" bind:value="{progress}">
+        <Alert class="green darken-2 green-text text-accent-1" {progress} dismissible bind:active on:dismiss="{() => {setTimeout(() => { active = !active }, 1500);}}">
+            <div slot="icon">
+                <Icon spin path="{mdiLoading}" size="28px"/>
             </div>
+            Loading
         </Alert>
         <Button on:click="{() => { active = !active }}">
             <div slot="icon">
@@ -48,8 +43,8 @@
             </div>
             reset
         </Button>
-        <div style="display: flex; align-items: center; justify-content: center">
-            <Switch class="{checked ? 'error-color' : 'grey lighten-2'}" bind:checked rounded>
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <Switch class="{active ? 'error-color' : 'grey lighten-2'}" bind:checked="{active}" rounded>
                 <div slot="on">
                     <Icon class="white-text" path="{mdiCheck}" size="19px"/>
                 </div>
@@ -57,10 +52,14 @@
                     <Icon class="white-text" path="{mdiClose}" size="19px"/>
                 </div>
                 <div slot="dot">
-                    {#if checked}
-                        <div in:scale="{{ x: -50, duration: 330, easing: expoOut }}">😀</div>
+                    {#if active}
+                        <div in:scale="{{ x: -50, duration: 330, easing: expoOut }}">
+                            <Icon class="primary-text" path="{mdiMicrophone}" size="16px"/>
+                        </div>
                     {:else}
-                        <div in:scale="{{ x: 50, duration: 330, easing: expoOut }}">🤯</div>
+                        <div in:scale="{{ x: 50, duration: 330, easing: expoOut }}">
+                            <Icon class="primary-text" path="{mdiMicrophoneOff}" size="16px"/>
+                        </div>
                     {/if}
                 </div>
             </Switch>

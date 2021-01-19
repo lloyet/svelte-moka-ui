@@ -4,6 +4,7 @@
     export let rounded:boolean = undefined;
     export let outlined:boolean = undefined;
     export let checked:boolean = false;
+    export let icon:boolean = false;
     export let disabled:boolean = undefined;
 </script>
 
@@ -14,6 +15,7 @@
     class="{klass} m-switch"
     class:rounded
     class:outlined
+    class:icon
     class:disabled>
     <input type="checkbox" bind:checked {disabled}>
     <span class="slider">

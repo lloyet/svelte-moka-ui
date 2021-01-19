@@ -6,8 +6,11 @@
     export let label:string = undefined;
     export let rounded:boolean = false;
     export let outlined:boolean = false;
+    export let pulse: boolean = false;
+    export let spin:boolean = false;
+    export let flip:string = '';
     export let tile:boolean = false;
-    export let size:string = '22';
+    export let size:string = '22px';
     export let disabled:boolean = false;
 </script>
 
@@ -21,6 +24,10 @@
     class:rounded
     class:outlined
     class:tile
+    class:pulse
+    class:spin
+    class:flip-horizontal="{flip.includes('horizontal')}"
+    class:flip-vertical="{flip.includes('vertical')}"
     {style}>
     <svg
         xmlns="http://www.w3.org/2000/svg"

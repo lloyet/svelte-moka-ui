@@ -13,14 +13,17 @@
     export let outlined: boolean = false;
     export let rounded:boolean = false;
     export let tile: boolean = false;
+    export let text:boolean = false;
     export let border: string = '';
     export let dismissible: boolean = false;
+    export let loading: boolean = false;
+    export let progress:string = '0';
     export let active: boolean = false;
     export let style: string = '';
     export let inTrans: any = fly;
     export let outTrans: any = fly;
-    export let inOpts: any = { x: 150, duration: 800, easing: quintOut };
-    export let outOpts: any = { x: 150, duration: 800, easing: quintOut };
+    export let inOpts: any = { y: -50, duration: 800, easing: quintOut };
+    export let outOpts: any = { y: -50, duration: 800, easing: quintOut };
     
 
     const clickHandler = (): void => {
@@ -39,17 +42,23 @@
         class:outlined
         class:tile
         class:rounded
+        class:text
         {style}
         in:inTrans="{inOpts}"
         out:outTrans="{outOpts}">
         <div class="m-alert__wrapper">
+            <div class="m-alert__icon">
+                <slot name="icon"></slot>
+            </div>
             <div class="m-alert__content">
-                <slot />
+                <slot></slot>
             </div>
             {#if dismissible}
                 <div class="m-alert__closer">
                     <button on:click="{clickHandler}">
-                        <Icon path="{mdiClose}"/>
+                        <slot name="close">
+                            <Icon path="{mdiClose}"/>
+                        </slot>
                     </button>
                 </div>
             {/if}
@@ -57,5 +66,13 @@
                 <div class="m-alert__border border-{border}"></div>
             {/if}
         </div>
+        {#if loading}
+            <div class="m-alert__line"></div>
+            <div class="m-alert__subline m-alert__dec"></div>
+            <div class="m-alert__subline m-alert__inc"></div>
+        {:else if progress !== '0'}
+            <div class="m-alert__line"></div>
+            <div class="m-alert__progress" style="--progress: {progress}%;"></div>
+        {/if}
     </div>
 {/if}

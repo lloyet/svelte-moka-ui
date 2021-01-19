@@ -31,7 +31,19 @@
         border-radius: 0;
     }
 
-    &.animation-spin {
-        animation: spin 800ms ease-in-out reverse;
+    &.spin {
+        animation: spin 1000ms 0s infinite linear;
+    }
+
+    &.pulse {
+        animation: spin 1000ms 0s infinite steps(8);
+    }
+
+    &.flip-horizontal {
+        transform: scale(-1, 1);
+    }
+
+    &.flip-vertical {
+        transform: scale(1, -1);
     }
 }
