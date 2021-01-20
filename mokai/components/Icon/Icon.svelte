@@ -9,6 +9,7 @@
     export let pulse: boolean = false;
     export let spin:boolean = false;
     export let flip:string = '';
+    export let hover:string = '';
     export let tile:boolean = false;
     export let size:string = '22px';
     export let disabled:boolean = false;
@@ -28,6 +29,8 @@
     class:spin
     class:flip-horizontal="{flip.includes('horizontal')}"
     class:flip-vertical="{flip.includes('vertical')}"
+    class:hover-scale="{hover.includes('scale')}"
+    class:hover-spin="{hover.includes('spin')}"
     {style}>
     <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -1,7 +1,5 @@
 <script lang="ts">
     import { createEventDispatcher, onMount } from 'svelte';
-    import { fly } from 'svelte/transition';
-    import { quintOut } from 'svelte/easing';
     import Icon from '../Icon/Icon.svelte';
     import { mdiClose } from '@mdi/js';
     
@@ -16,63 +14,77 @@
     export let text:boolean = false;
     export let border: string = '';
     export let dismissible: boolean = false;
-    export let loading: boolean = false;
-    export let progress:string = '0';
-    export let active: boolean = false;
+    export let duration: string = '';
+    export let progress:number = 0;
     export let style: string = '';
-    export let inTrans: any = fly;
-    export let outTrans: any = fly;
-    export let inOpts: any = { y: -50, duration: 800, easing: quintOut };
-    export let outOpts: any = { y: -50, duration: 800, easing: quintOut };
-    
 
-    const clickHandler = (): void => {
-        active = false;
+    const closeHandler = (): void => {
         dispatch('dismiss');
-    }
+    };
+
+    onMount(() => {
+        if (duration !== '' && duration !== 'infinite') {
+            progress = 0;
+            const period: number = parseInt(duration);
+            const coef: number = 100 / period;
+            const timer = setInterval(() => {
+                if (progress < 100) {
+                    progress += coef * 10;
+                } else {
+                    clearInterval(timer);
+                    progress = 0;
+                    closeHandler();
+                }
+            }, 10);
+        }
+    });
 </script>
 
 <style lang="scss" src="./Alert.scss"></style>
 
-{#if active}
-    <div
-        role="alert"
-        class="m-alert {klass} {border.split(' ').map(b => b = `border-${b}`).join(' ')}"
-        class:dense
-        class:outlined
-        class:tile
-        class:rounded
-        class:text
-        {style}
-        in:inTrans="{inOpts}"
-        out:outTrans="{outOpts}">
-        <div class="m-alert__wrapper">
-            <div class="m-alert__icon">
-                <slot name="icon"></slot>
+<div
+    role="alert"
+    class="m-alert {klass} {border.split(' ').map(b => b = `border-${b}`).join(' ')}"
+    class:dense
+    class:outlined
+    class:tile
+    class:rounded
+    class:text
+    {style}>
+    <div class="m-alert__wrapper">
+        <div class="m-alert__icon">
+            <slot name="icon"></slot>
+        </div>
+        <div class="m-alert__content">
+            <div class="m-alert__title">
+                <slot name="title"></slot>
             </div>
-            <div class="m-alert__content">
+            <div class="m-alert__body">
                 <slot></slot>
             </div>
-            {#if dismissible}
-                <div class="m-alert__closer">
-                    <button on:click="{clickHandler}">
-                        <slot name="close">
-                            <Icon path="{mdiClose}"/>
-                        </slot>
-                    </button>
-                </div>
-            {/if}
-            {#if border}
-                <div class="m-alert__border border-{border}"></div>
-            {/if}
+            <div class="m-alert__footer">
+                <slot name="footer"></slot>
+            </div>
         </div>
-        {#if loading}
-            <div class="m-alert__line"></div>
-            <div class="m-alert__subline m-alert__dec"></div>
-            <div class="m-alert__subline m-alert__inc"></div>
-        {:else if progress !== '0'}
-            <div class="m-alert__line"></div>
-            <div class="m-alert__progress" style="--progress: {progress}%;"></div>
+        {#if dismissible}
+            <div class="m-alert__closer">
+                <button on:click="{closeHandler}">
+                    <slot name="close">
+                        <Icon hover="scale" path="{mdiClose}"/>
+                    </slot>
+                </button>
+            </div>
+        {/if}
+        {#if border}
+            <div class="m-alert__border border-{border}"></div>
         {/if}
     </div>
-{/if}
+    {#if duration === 'infinite'}
+        <div class="m-alert__line"></div>
+        <div class="m-alert__subline m-alert__dec"></div>
+        <div class="m-alert__subline m-alert__inc"></div>
+    {:else if progress !== '0'}
+        <div class="m-alert__line"></div>
+        <div class="m-alert__progress" style="--progress: {progress}%;"></div>
+    {/if}
+</div>

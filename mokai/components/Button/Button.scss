@@ -20,7 +20,7 @@
         overflow: hidden;
         opacity: 0;
         max-width: 0;
-        transition: all 330ms ease-in-out, transform 330ms;
+        transition: all 330ms ease-in-out;
         transform: translate(-10px) scale(0);
     }
 
@@ -32,8 +32,12 @@
     }
 
     &.outlined {
-        border: 1px solid $primary-color;
-        background: none;
+        border: 1px solid;
+        background: transparent !important;
+    }
+
+    &.tile {
+        border-radius: 0;
     }
 
     &.rounded {
@@ -44,27 +48,19 @@
         box-shadow: #b2b2b2 1px 1px 5px 0px;
     }
 
-    &:active {
-        background: $primary-color;
+    &.block {
+        width: 100%;
     }
 
-    &:hover {
-        background: lighten($color: $primary-color, $amount: 40%);
-        
+    &.disabled {
+        background: lightgrey !important;
+        color: #b2b2b2 !important;
+        pointer-events: none;
     }
 
     &:hover .m-button__icon {
         max-width: 120px;
         transform: translate(0px) scale(1);
         opacity: 1.0;
-    }
-
-    &:hover .m-button__content {
-        color: invert($color: $secondary-color, $weight: 100%);
-    }
-
-    &:disabled {
-        background: #b2b2b2;
-        pointer-events: none;
     }
 }

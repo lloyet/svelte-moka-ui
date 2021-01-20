@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { scale } from 'svelte/transition';
+    import { fly, scale } from 'svelte/transition';
     import { expoOut } from 'svelte/easing';
-    import { mdiFire, mdiCheck, mdiClose, mdiLoading, mdiMicrophone, mdiMicrophoneOff } from '@mdi/js';
+    import { mdiFire, mdiCheck, mdiClose, mdiLoading, mdiMicrophone, mdiMicrophoneOff, mdiCog } from '@mdi/js';
     import MokaApp from '../mokai/components/MokaApp';
     import Alert from '../mokai/components/Alert';
     import Button from '../mokai/components/Button';
@@ -21,7 +21,7 @@
         background: #A8A8A8;
     }
 
-    @media (min-width: 640px) {
+    @media (min-width: 0px) {
         main {
             max-width: none;
         }
@@ -30,13 +30,27 @@
 
 <MokaApp theme="dark">
     <main>
-        <input type="range" bind:value="{progress}">
-        <Alert class="green darken-2 green-text text-accent-1" {progress} dismissible bind:active on:dismiss="{() => {setTimeout(() => { active = !active }, 1500);}}">
-            <div slot="icon">
-                <Icon spin path="{mdiLoading}" size="28px"/>
+        <Button class="primary-color white-text" outlined>Footer</Button>
+        <input type="range" min="0" max="100" bind:value="{progress}">
+        {#if active}
+            <div transition:fly="{{ x: 350, duration: 800, easing: expoOut }}">
+                <Alert class="green darken-2 green-text text-accent-1" {progress} dense duration="infinite" on:dismiss="{() => { active = false; setTimeout(() => {
+                    active = true;
+                }, 1500); }}">
+                    <div slot="icon">
+                        <Icon spin path="{mdiCog}" size="42px"/>
+                    </div>
+                    <div slot="title">
+                        <h3>Reloading</h3>
+                    </div>
+                    Are you sure ?
+                    <div style="display: flex" slot="footer">
+                        <Button on:click="{() => active = false}">Accept</Button>
+                        <Button on:click="{() => active = false}">Reject</Button>
+                    </div>
+                </Alert>
             </div>
-            Loading
-        </Alert>
+        {/if}
         <Button on:click="{() => { active = !active }}">
             <div slot="icon">
                 <Icon path="{mdiFire}"/>

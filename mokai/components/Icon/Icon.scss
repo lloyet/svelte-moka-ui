@@ -18,6 +18,7 @@
     border: none;
     vertical-align: middle;
     border-radius: $icon-border-radius;
+    transition: all cubic-bezier(0.23, 1, 0.320, 1) 250ms;
 
     &.rounded {
         border-radius: 2em;
@@ -45,5 +46,13 @@
 
     &.flip-vertical {
         transform: scale(1, -1);
+    }
+
+    &.hover-scale:hover {
+        transform: scale(1.3);
+    }
+
+    &.hover-spin:hover {
+        transform: rotate(90deg);
     }
 }
