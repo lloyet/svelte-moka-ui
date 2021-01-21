@@ -1,17 +1,19 @@
 @import './variables';
 
 .m-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: inline-flex;
+    vertical-align: middle;
+    flex: 0 0 auto;
+    position: relative;
     cursor: pointer;
     width: max-content;
-    min-height: 12px;
     border-radius: $button-border-radius;
     border: none;
     padding: $button-padding;
     overflow: hidden;
-    transition: all 330ms ease-in-out;
+    transition: all ease-in-out 330ms, transform ease-in-out 50ms;
+
+    @include elevation(1);
 
     .m-button__icon {
         display: flex;
@@ -20,7 +22,7 @@
         overflow: hidden;
         opacity: 0;
         max-width: 0;
-        transition: all 330ms ease-in-out;
+        transition: all 225ms ease-in-out;
         transform: translate(-10px) scale(0);
     }
 
@@ -31,9 +33,24 @@
         height: 100%;
     }
 
+    &::before {
+        position: absolute;
+        content: '';
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        color: inherit;
+        background-color: currentColor;
+        pointer-events: none;
+        border-radius: inherit;
+        opacity: 0;
+        transition: inherit;
+    }
+
     &.outlined {
         border: 1px solid;
-        background: transparent !important;
+        background-color: transparent !important;
     }
 
     &.tile {
@@ -44,23 +61,51 @@
         border-radius: 2em;
     }
 
-    &.bordered {
-        box-shadow: #b2b2b2 1px 1px 5px 0px;
-    }
-
     &.block {
         width: 100%;
     }
 
+    &.flat {
+        box-shadow: none;
+    }
+
+    &.text {
+        background-color: transparent !important;
+    }
+
+    &:not(.disabled) {
+        &:active::before {
+            opacity: $button-active-opacity;
+        }
+    }
+
+    &:not(.fixed) {
+        &:active {
+            transform: scale($button-active-scale);
+        }
+    }
+
     &.disabled {
-        background: lightgrey !important;
         color: #b2b2b2 !important;
         pointer-events: none;
+        border-color: #b2b2b2 !important;
+        background-color: transparent !important;
+
+        &:not(.text+.outlined) {
+            background-color: lightgrey !important;
+        }
+        &:not(.outlined) {
+            border: none;
+        }
     }
 
     &:hover .m-button__icon {
         max-width: 120px;
         transform: translate(0px) scale(1);
         opacity: 1.0;
+    }
+
+    &:hover::before {
+        opacity: $button-hover-opacity;
     }
 }

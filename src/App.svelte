@@ -18,7 +18,6 @@
         padding: 1em;
         max-width: 240px;
         margin: 0 auto;
-        background: #A8A8A8;
     }
 
     @media (min-width: 0px) {
@@ -30,23 +29,21 @@
 
 <MokaApp theme="dark">
     <main>
-        <Button class="primary-color white-text" outlined>Footer</Button>
+        <Button class="error-color primary-text" flat outlined>Footer</Button>
         <input type="range" min="0" max="100" bind:value="{progress}">
         {#if active}
             <div transition:fly="{{ x: 350, duration: 800, easing: expoOut }}">
-                <Alert class="green darken-2 green-text text-accent-1" {progress} dense duration="infinite" on:dismiss="{() => { active = false; setTimeout(() => {
-                    active = true;
-                }, 1500); }}">
+                <Alert class="green darken-2 green-text text-accent-1" {progress} duration="infinite" dismissible on:dismiss="{() => { active = false }}">
                     <div slot="icon">
                         <Icon spin path="{mdiCog}" size="42px"/>
                     </div>
                     <div slot="title">
-                        <h3>Reloading</h3>
+                        <h4>Reloading</h4>
                     </div>
                     Are you sure ?
                     <div style="display: flex" slot="footer">
-                        <Button on:click="{() => active = false}">Accept</Button>
-                        <Button on:click="{() => active = false}">Reject</Button>
+                        <Button class="transparent green-text text-accent-1" flat>Reject</Button>
+                        <Button class="green-text text-accent-1" flat outlined>Accept</Button>
                     </div>
                 </Alert>
             </div>

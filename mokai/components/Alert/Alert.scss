@@ -9,7 +9,6 @@
     .m-alert__wrapper {
         align-items: center;
         border-radius: inherit;
-        padding: inherit;
         display: flex;
 
         .m-alert__closer {
@@ -27,6 +26,7 @@
         }
 
         .m-alert__icon {
+            flex: 1;
             padding-right: inherit;
         }
 
@@ -74,7 +74,7 @@
         }
 
         .m-alert__content {
-            flex: 1 1 auto;
+            flex: 15 1 auto;
             display: flex;
             flex-direction: column;
 
@@ -87,12 +87,12 @@
                 display: flex;
                 justify-content: flex-start;
                 padding-top: $alert-dense-padding;
-                padding-bottom: $alert-dense-padding;
             }
 
             .m-alert__footer {
                 display: flex;
                 justify-content: flex-end;
+                padding-top: $alert-dense-padding;
             }
         }
     }
